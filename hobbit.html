@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+        body{
+            background-image: url('hobbit.jpg');
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+        .mask{
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .circle {
+            height: 100px;
+            width: 100px;
+            border-radius: 100%;
+            border: 2px solid white;
+            transition: border 250ms ease;
+            color: rgba(134, 139, 115, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .circle:hover{
+            border: 6px solid white;
+            transition: border 250ms ease;
+            color: #4a4f4e;
+
+        }
+        .loadCir1 {
+            border: 2px solid white;
+            border-color:transparent transparent white white;
+            transform: rotate(45deg);
+            width:100px;
+            height:100px;
+            border-radius:100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display:none;
+        }
+        .loadCir2{
+            border: 2px solid white;
+            border-color: white white transparent transparent;
+            transform: rotate(45deg);
+            width:100px;
+            height:100px;
+            border-radius:100%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display:none;
+
+            /*animation: rota 10s linear infinite;*/
+        }
+        .bckWait{
+            border: 2px solid lightslategray;
+            width:100px;
+            height:100px;
+            border-radius:100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mask">
+        <div class="circle">
+            <div>Begin</div>
+        </div>
+        <div>
+        <div class="loadCir1"></div>
+        <div class="loadCir2"></div>
+            <div class="bckWait"></div>
+        </div>
+    </div>
+    <script>
+        var circle = document.getElementsByTagName('div')[1];
+        circle.addEventListener('click',function(){
+           //this.className = '';
+            var mainCir = document.getElementsByTagName('div')[3];
+            var loadCir2 = document.getElementsByTagName('div')[4];
+            var loadCir = document.getElementsByTagName('div')[5];
+            document.getElementsByTagName('div')[0].replaceChild(mainCir,circle);
+            loadCir.style.display = "block";
+            loadCir2.style.display = "block";
+            document.getElementsByClassName('bckWait')[0].style.display = "block";
+                var counter = 45;
+                 var x= setInterval(function(){
+                if(counter <225){
+                    loadCir.style.transform = "rotate("+counter++ +"deg)";
+                }
+                if(counter == 225){
+                    loadCir.style.borderColor = "lightslategray lightslategray transparent transparent";
+                    loadCir.style.transform = "rotate(405deg)";
+                }
+                if(counter >=225 && counter <405){
+                    loadCir2.style.transform = "rotate("+(counter++ - 180) +"deg)";
+                }
+                if(counter == 405){
+                    loadCir2.style.borderColor = "transparent transparent lightslategray lightslategray";
+                    loadCir2.style.transform = "rotate(405deg)";
+                        clearInterval(x);
+                }
+            },10);
+        });
+    </script>
+</body>
+</html>
